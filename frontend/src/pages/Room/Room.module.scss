@@ -1,0 +1,1899 @@
+@use "../../styles/variables" as *;
+
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  color: $text-primary;
+
+  background:
+    radial-gradient(
+      circle at 60% 20%,
+      rgba(116, 86, 255, 0.12),
+      transparent 32%
+    ),
+    $bg-primary;
+}
+
+.glowLeft,
+.glowRight {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.glowLeft {
+  left: -250px;
+  bottom: -150px;
+  background: rgba(116, 86, 255, 0.2);
+}
+
+.glowRight {
+  right: -250px;
+  top: 100px;
+  background: rgba(66, 101, 255, 0.14);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  position: relative;
+  z-index: 10;
+
+  height: 76px;
+
+  padding: 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid $border;
+
+  background: rgba(7, 11, 24, 0.7);
+
+  backdrop-filter: blur(20px);
+}
+
+.brand {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: $text-primary;
+  border: 0;
+  background: transparent;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.logo {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  color: $purple-light;
+  border: 2px solid $purple;
+  border-radius: 8px;
+  font-size: 21px;
+  transform: rotate(45deg);
+}
+
+.roomInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  span {
+    color: $text-muted;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+  }
+
+  strong {
+    padding: 8px 12px;
+
+    color: $purple-light;
+
+    border: 1px solid
+      rgba(116, 86, 255, 0.3);
+
+    border-radius: 8px;
+
+    background:
+      rgba(116, 86, 255, 0.08);
+
+    font-size: 12px;
+
+    letter-spacing: 0.14em;
+  }
+}
+
+.hostBadge {
+  padding: 6px 9px;
+
+  color: $purple-light;
+
+  border: 1px solid
+    rgba(116, 86, 255, 0.25);
+
+  border-radius: 999px;
+
+  background:
+    rgba(116, 86, 255, 0.08);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1450px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 270px 1fr;
+
+  min-height: calc(100vh - 76px);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+  padding: 34px 25px;
+
+  border-right: 1px solid $border;
+}
+
+.sidebarHeader {
+  margin-bottom: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    color: $text-muted;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+  }
+
+  h2 {
+    margin: 5px 0 0;
+
+    font-size: 17px;
+  }
+}
+
+.memberCount {
+  width: 29px;
+  height: 29px;
+
+  display: grid;
+  place-items: center;
+
+  color: $text-secondary;
+
+  border: 1px solid $border;
+
+  border-radius: 8px;
+
+  background: $surface;
+
+  font-size: 11px;
+}
+
+.memberList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member {
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid transparent;
+
+  border-radius: 10px;
+
+  transition: $transition;
+
+  &:hover {
+    border-color: $border;
+
+    background:
+      rgba(255, 255, 255, 0.02);
+  }
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: $text-primary;
+
+  border: 1px solid
+    rgba(116, 86, 255, 0.35);
+
+  border-radius: 9px;
+
+  background:
+    rgba(116, 86, 255, 0.14);
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.memberDetails {
+  min-width: 0;
+
+  flex: 1;
+
+  strong {
+    display: block;
+
+    overflow: hidden;
+
+    font-size: 12px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: $text-muted;
+
+    font-size: 9px;
+  }
+}
+
+.onlineDot,
+.liveDot {
+  border-radius: 50%;
+
+  background: #65dba5;
+
+  box-shadow:
+    0 0 8px rgba(101, 219, 165, 0.5);
+}
+
+.onlineDot {
+  width: 6px;
+  height: 6px;
+}
+
+.inviteCard {
+  margin-top: 30px;
+  padding: 17px;
+
+  border: 1px solid $border;
+
+  border-radius: $radius-md;
+
+  background:
+    rgba(18, 27, 52, 0.45);
+
+  span {
+    color: $text-muted;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+  }
+
+  strong {
+    display: block;
+
+    margin-top: 10px;
+
+    color: $purple-light;
+
+    font-size: 19px;
+
+    letter-spacing: 0.15em;
+  }
+
+  p {
+    margin: 8px 0 0;
+
+    color: $text-muted;
+
+    font-size: 9px;
+    line-height: 1.5;
+  }
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.mainContent {
+  width: 100%;
+  max-width: 950px;
+
+  margin: 0 auto;
+  padding: 50px 45px 80px;
+}
+
+.roomHeading {
+  margin-bottom: 28px;
+
+  h1 {
+    margin: 11px 0 7px;
+
+    font-size: 34px;
+
+    letter-spacing: -0.04em;
+  }
+
+  p {
+    margin: 0;
+
+    color: $text-secondary;
+
+    font-size: 12px;
+  }
+}
+
+.modeLabel,
+.cardLabel,
+.storyCard > span,
+.voteHeading span,
+.progressCard span,
+.resultsHeader > div:first-child > span {
+  color: $purple-light;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+/* =========================
+   SHARED CARDS
+========================= */
+
+.startRoundCard,
+.storyCard,
+.voteSection,
+.progressCard,
+.waitingCard,
+.resultsSection {
+  border: 1px solid $border;
+
+  border-radius: $radius-lg;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 27, 52, 0.72),
+      rgba(10, 16, 34, 0.82)
+    );
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   START ROUND
+========================= */
+
+.startRoundCard {
+  padding: 30px;
+
+  h2 {
+    margin: 10px 0 6px;
+
+    font-size: 22px;
+  }
+
+  > p {
+    margin: 0 0 20px;
+
+    color: $text-secondary;
+
+    font-size: 11px;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 115px;
+
+    padding: 16px;
+
+    resize: vertical;
+
+    color: $text-primary;
+
+    border: 1px solid $border;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+      rgba(6, 10, 23, 0.65);
+
+    font: inherit;
+    font-size: 13px;
+
+    transition: $transition;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $border-bright;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(116, 86, 255, 0.08);
+    }
+  }
+}
+
+.roundActions {
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > span {
+    color: $text-muted;
+
+    font-size: 9px;
+  }
+
+  button {
+    padding: 11px 18px;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+      linear-gradient(
+        135deg,
+        $purple,
+        $blue
+      );
+
+    font-size: 11px;
+    font-weight: 700;
+
+    transition: $transition;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 25px
+        rgba(116, 86, 255, 0.25);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      opacity: 0.4;
+    }
+  }
+}
+
+/* =========================
+   STORY
+========================= */
+
+.storyCard {
+  padding: 24px 27px;
+
+  h2 {
+    margin: 9px 0 18px;
+
+    font-size: 20px;
+  }
+}
+
+.votingStatus {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: $text-secondary;
+
+  font-size: 9px;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+}
+
+/* =========================
+   VOTING
+========================= */
+
+.voteSection {
+  margin-top: 18px;
+  padding: 27px;
+}
+
+.voteHeading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  h2 {
+    margin: 6px 0 0;
+
+    font-size: 18px;
+  }
+}
+
+.selectedText {
+  color: $text-secondary;
+
+  font-size: 10px;
+
+  strong {
+    color: $purple-light;
+  }
+}
+
+/* =========================
+   POKER CARDS
+========================= */
+
+.pokerCards {
+  margin-top: 25px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(9, minmax(55px, 1fr));
+
+  gap: 10px;
+
+  button {
+    position: relative;
+
+    aspect-ratio: 0.75;
+
+    min-height: 90px;
+
+    display: grid;
+    place-items: center;
+
+    color: $text-primary;
+
+    border: 1px solid $border;
+
+    border-radius: 12px;
+
+    background:
+      linear-gradient(
+        160deg,
+        rgba(25, 35, 67, 0.85),
+        rgba(11, 17, 36, 0.9)
+      );
+
+    font-size: 19px;
+    font-weight: 750;
+
+    transition: $transition;
+
+    &:hover:not(:disabled) {
+      border-color:
+        rgba(116, 86, 255, 0.6);
+
+      transform: translateY(-5px);
+
+      box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.25);
+    }
+
+    &:disabled {
+      cursor: wait;
+    }
+  }
+
+  .selectedCard {
+    color: white;
+
+    border-color: $purple;
+
+    background:
+      linear-gradient(
+        160deg,
+        rgba(116, 86, 255, 0.42),
+        rgba(46, 39, 105, 0.5)
+      );
+
+    transform: translateY(-7px);
+
+    box-shadow:
+      0 0 0 1px
+        rgba(116, 86, 255, 0.2),
+      0 15px 35px
+        rgba(116, 86, 255, 0.22),
+      0 0 30px
+        rgba(116, 86, 255, 0.12);
+  }
+}
+
+.voteHint {
+  margin: 18px 0 0;
+
+  color: $text-muted;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+/* =========================
+   TEAM PROGRESS
+========================= */
+
+.progressCard {
+  margin-top: 18px;
+  padding: 20px 24px;
+
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  align-items: center;
+  gap: 20px;
+
+  strong {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+  }
+
+  button {
+    padding: 10px 15px;
+
+    color: white;
+
+    border: 1px solid
+      rgba(116, 86, 255, 0.45);
+
+    border-radius: 8px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(116, 86, 255, 0.9),
+        rgba(66, 101, 255, 0.9)
+      );
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition: $transition;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 22px
+        rgba(116, 86, 255, 0.2);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      color: $text-secondary;
+
+      border-color: $border;
+
+      background: $surface;
+
+      opacity: 0.4;
+
+      transform: none;
+
+      box-shadow: none;
+    }
+  }
+}
+
+.progressBar {
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  div {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+      linear-gradient(
+        90deg,
+        $purple,
+        $blue
+      );
+
+    transition:
+      width 300ms ease;
+  }
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.resultsSection {
+  margin-top: 18px;
+  padding: 28px;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid $border;
+
+  h2 {
+    margin: 7px 0 6px;
+
+    font-size: 21px;
+  }
+
+  p {
+    margin: 0;
+
+    color: $text-secondary;
+
+    font-size: 10px;
+  }
+}
+
+.averageCard {
+  min-width: 120px;
+
+  padding: 16px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: 1px solid
+    rgba(116, 86, 255, 0.38);
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(116, 86, 255, 0.16),
+      rgba(66, 101, 255, 0.07)
+    );
+
+  box-shadow:
+    0 0 30px
+    rgba(116, 86, 255, 0.08);
+
+  span {
+    color: $text-muted;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+  }
+
+  strong {
+    margin-top: 5px;
+
+    color: $purple-light;
+
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  small {
+    margin-top: 5px;
+
+    color: $text-muted;
+
+    font-size: 8px;
+  }
+}
+
+.resultVotes {
+  margin-top: 22px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.resultVote {
+  min-height: 66px;
+
+  padding: 13px 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border: 1px solid $border;
+
+  border-radius: 12px;
+
+  background:
+    rgba(8, 13, 29, 0.45);
+
+  transition: $transition;
+
+  &:hover {
+    border-color:
+      rgba(116, 86, 255, 0.32);
+
+    background:
+      rgba(18, 27, 52, 0.65);
+  }
+}
+
+.resultMember {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  > div:last-child {
+    min-width: 0;
+  }
+
+  strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: $text-primary;
+
+    font-size: 12px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: $text-muted;
+
+    font-size: 9px;
+  }
+}
+
+.resultValue {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: white;
+
+  border: 1px solid
+    rgba(116, 86, 255, 0.55);
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(116, 86, 255, 0.32),
+      rgba(66, 101, 255, 0.15)
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(116, 86, 255, 0.08);
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.resultSummary {
+  margin-top: 22px;
+  padding-top: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid $border;
+
+  > span {
+    color: $text-muted;
+
+    font-size: 9px;
+  }
+
+  button {
+    padding: 11px 17px;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background:
+      linear-gradient(
+        135deg,
+        $purple,
+        $blue
+      );
+
+    font-size: 10px;
+    font-weight: 700;
+
+    transition: $transition;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 25px
+        rgba(116, 86, 255, 0.25);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      opacity: 0.4;
+    }
+  }
+}
+
+/* =========================
+   WAITING
+========================= */
+
+.waitingCard {
+  padding: 70px 30px;
+
+  text-align: center;
+
+  .waitingIcon {
+    width: 50px;
+    height: 50px;
+
+    margin: 0 auto 17px;
+
+    display: grid;
+    place-items: center;
+
+    color: $purple-light;
+
+    border: 1px solid
+      rgba(116, 86, 255, 0.3);
+
+    border-radius: 14px;
+
+    background:
+      rgba(116, 86, 255, 0.08);
+
+    font-size: 25px;
+  }
+
+  h2 {
+    margin: 0;
+
+    font-size: 20px;
+  }
+
+  p {
+    margin: 8px 0 0;
+
+    color: $text-secondary;
+
+    font-size: 11px;
+  }
+}
+
+/* =========================
+   LOADING / ERRORS
+========================= */
+
+.loading,
+.errorState {
+  min-height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  color: $text-secondary;
+}
+
+.errorState {
+  align-content: center;
+
+  text-align: center;
+
+  h1 {
+    color: $text-primary;
+  }
+}
+
+.errorMessage {
+  margin-top: 15px;
+
+  color: #ff8d9b;
+
+  font-size: 11px;
+}
+
+/* =========================
+   DECISION ROOM — CREATE
+========================= */
+
+.decisionOptionFields {
+  margin-top: 24px;
+}
+
+.decisionOptionRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+
+  input {
+    min-width: 0;
+    flex: 1;
+    padding: 13px 15px;
+    color: $text-primary;
+    border: 1px solid $border;
+    border-radius: 11px;
+    outline: none;
+    background: rgba(6, 10, 23, 0.65);
+    font: inherit;
+    font-size: 12px;
+    transition: $transition;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $border-bright;
+      box-shadow: 0 0 0 3px rgba(116, 86, 255, 0.08);
+    }
+  }
+}
+
+.removeDecisionOption {
+  width: 42px;
+  flex-shrink: 0;
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: rgba(18, 27, 52, 0.65);
+  font-size: 18px;
+  transition: $transition;
+
+  &:hover {
+    color: #ff8d9b;
+    border-color: rgba(255, 141, 155, 0.4);
+    background: rgba(255, 141, 155, 0.08);
+  }
+}
+
+.addDecisionOption {
+  margin-top: 14px;
+  padding: 10px 14px;
+  color: $purple-light;
+  border: 1px dashed rgba(116, 86, 255, 0.45);
+  border-radius: 9px;
+  background: rgba(116, 86, 255, 0.06);
+  font-size: 10px;
+  font-weight: 700;
+  transition: $transition;
+
+  &:hover {
+    border-color: $purple;
+    background: rgba(116, 86, 255, 0.12);
+  }
+}
+
+/* =========================
+   DECISION ROOM — VOTING
+========================= */
+
+.decisionOptions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.decisionOption {
+  width: 100%;
+  padding: 15px 17px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(18, 27, 52, 0.68), rgba(8, 13, 29, 0.72));
+  font-size: 12px;
+  font-weight: 650;
+  text-align: left;
+  transition: $transition;
+
+  &::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    border: 1px solid rgba(174, 184, 212, 0.55);
+    border-radius: 50%;
+    transition: $transition;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: rgba(116, 86, 255, 0.5);
+    background: rgba(116, 86, 255, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.selectedDecisionOption {
+  border-color: $purple;
+  background: linear-gradient(145deg, rgba(116, 86, 255, 0.22), rgba(66, 101, 255, 0.09));
+  box-shadow: 0 0 0 1px rgba(116, 86, 255, 0.12), 0 10px 30px rgba(116, 86, 255, 0.1);
+
+  &::before {
+    border: 4px solid $purple-light;
+    background: white;
+    box-shadow: 0 0 12px rgba(116, 86, 255, 0.4);
+  }
+}
+
+.confidenceSection {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid $border;
+
+  > span {
+    color: $purple-light;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  h3 {
+    margin: 7px 0 0;
+    font-size: 16px;
+  }
+}
+
+.confidenceButtons {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 7px;
+}
+
+.confidenceButton {
+  min-height: 42px;
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: 9px;
+  background: rgba(18, 27, 52, 0.58);
+  font-size: 11px;
+  font-weight: 700;
+  transition: $transition;
+
+  &:hover:not(:disabled) {
+    color: $text-primary;
+    border-color: rgba(116, 86, 255, 0.5);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.selectedConfidence {
+  color: white;
+  border-color: $purple;
+  background: linear-gradient(135deg, rgba(116, 86, 255, 0.75), rgba(66, 101, 255, 0.55));
+  box-shadow: 0 8px 20px rgba(116, 86, 255, 0.16);
+}
+
+.reasonSection {
+  margin-top: 27px;
+
+  > span {
+    color: $purple-light;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+}
+
+.reasonTextarea {
+  width: 100%;
+  min-height: 105px;
+  margin-top: 11px;
+  padding: 15px;
+  resize: vertical;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 11px;
+  outline: none;
+  background: rgba(6, 10, 23, 0.65);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.55;
+  transition: $transition;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $border-bright;
+    box-shadow: 0 0 0 3px rgba(116, 86, 255, 0.08);
+  }
+}
+
+.reasonCount {
+  margin-top: 6px;
+  color: $text-muted;
+  font-size: 9px;
+  text-align: right;
+}
+
+.decisionSubmitRow {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  > span {
+    color: $text-muted;
+    font-size: 9px;
+  }
+
+  button {
+    padding: 11px 18px;
+    color: white;
+    border: 0;
+    border-radius: 9px;
+    background: linear-gradient(135deg, $purple, $blue);
+    font-size: 11px;
+    font-weight: 700;
+    transition: $transition;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(116, 86, 255, 0.25);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+}
+
+/* =========================
+   DECISION ROOM — RESULTS
+========================= */
+
+.decisionResults {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.decisionResultOption {
+  padding: 15px 17px;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: rgba(8, 13, 29, 0.45);
+}
+
+.decisionResultTop {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  strong {
+    color: $text-primary;
+    font-size: 12px;
+  }
+
+  span {
+    color: $text-secondary;
+    font-size: 10px;
+  }
+}
+
+.decisionResultBar {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.decisionResultFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, $purple, $blue);
+  box-shadow: 0 0 16px rgba(116, 86, 255, 0.2);
+  transition: width 350ms ease;
+}
+
+.teamResponses {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid $border;
+
+  > span {
+    color: $purple-light;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  > h3 {
+    margin: 7px 0 16px;
+    font-size: 18px;
+  }
+}
+
+.teamResponse {
+  padding: 16px;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: rgba(8, 13, 29, 0.45);
+
+  & + & {
+    margin-top: 9px;
+  }
+}
+
+.teamResponseHeader {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  > div:last-child {
+    min-width: 0;
+    flex: 1;
+  }
+
+  strong {
+    display: block;
+    color: $text-primary;
+    font-size: 12px;
+  }
+}
+
+.responseChoice {
+  margin-top: 3px;
+  color: $purple-light;
+  font-size: 10px;
+}
+
+.responseConfidence {
+  margin-left: auto;
+  padding: 6px 9px;
+  flex-shrink: 0;
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: rgba(18, 27, 52, 0.6);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.responseReason {
+  margin: 13px 0 0;
+  padding: 12px 14px;
+  color: $text-secondary;
+  border-left: 2px solid rgba(116, 86, 255, 0.5);
+  border-radius: 0 8px 8px 0;
+  background: rgba(116, 86, 255, 0.05);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+  .dashboard {
+    grid-template-columns:
+      220px 1fr;
+  }
+
+  .pokerCards {
+    grid-template-columns:
+      repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .roomInfo {
+    span,
+    .hostBadge {
+      display: none;
+    }
+  }
+
+  .dashboard {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mainContent {
+    padding:
+      35px 20px 60px;
+  }
+
+  .roomHeading {
+    h1 {
+      font-size: 29px;
+    }
+  }
+
+  .pokerCards {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+  .progressCard {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .resultsHeader {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .averageCard {
+    width: 100%;
+
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+
+    strong {
+      margin: 0;
+
+      font-size: 25px;
+    }
+
+    small {
+      margin: 0;
+    }
+  }
+
+  .resultSummary {
+    align-items: stretch;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .confidenceButtons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .decisionSubmitRow {
+    align-items: stretch;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .decisionOptionRow {
+    gap: 8px;
+  }
+
+  .teamResponseHeader {
+    flex-wrap: wrap;
+  }
+
+  .responseConfidence {
+    margin-left: 45px;
+  }
+}
+
+/* =========================
+   DECISION ROOM
+========================= */
+
+.decisionBuilder {
+  margin-top: 24px;
+}
+
+.decisionOptionInputRow {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.decisionOptionInput {
+  min-width: 0;
+  flex: 1;
+  padding: 12px 14px;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 10px;
+  outline: none;
+  background: rgba(6, 10, 23, 0.65);
+  transition: $transition;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $border-bright;
+    box-shadow: 0 0 0 3px rgba(116, 86, 255, 0.08);
+  }
+}
+
+.removeDecisionOption,
+.addDecisionOption {
+  color: $text-secondary;
+  border: 1px solid $border;
+  border-radius: 9px;
+  background: $surface;
+  transition: $transition;
+
+  &:hover:not(:disabled) {
+    color: $text-primary;
+    border-color: $border-bright;
+    background: $surface-hover;
+  }
+}
+
+.removeDecisionOption {
+  width: 42px;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.addDecisionOption {
+  margin-top: 14px;
+  padding: 10px 14px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.decisionRoundActions {
+  margin-top: 24px;
+}
+
+.decisionOptions {
+  margin-top: 22px;
+  display: grid;
+  gap: 10px;
+}
+
+.decisionOption {
+  width: 100%;
+  padding: 16px;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 12px;
+  background: $surface;
+  font-weight: 650;
+  text-align: left;
+  transition: $transition;
+
+  &:hover:not(:disabled) {
+    border-color: rgba(116, 86, 255, 0.5);
+    background: $surface-hover;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.selectedDecisionOption {
+  border-color: $purple-light;
+  background: rgba(116, 86, 255, 0.18);
+  box-shadow: 0 0 0 1px rgba(116, 86, 255, 0.1), 0 10px 28px rgba(116, 86, 255, 0.12);
+}
+
+.confidenceSection,
+.reasonSection {
+  margin-top: 28px;
+
+  > span {
+    color: $purple-light;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  h2 {
+    margin: 6px 0 0;
+    font-size: 18px;
+  }
+}
+
+.confidenceButtons {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.confidenceButton {
+  width: 44px;
+  height: 44px;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: $surface;
+  font-weight: 700;
+  transition: $transition;
+
+  &:hover:not(:disabled) {
+    border-color: rgba(116, 86, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    cursor: wait;
+  }
+}
+
+.selectedConfidence {
+  color: white;
+  border-color: $purple-light;
+  background: rgba(116, 86, 255, 0.25);
+  box-shadow: 0 0 20px rgba(116, 86, 255, 0.14);
+}
+
+.reasonTextarea {
+  width: 100%;
+  min-height: 110px;
+  margin-top: 12px;
+  padding: 15px;
+  resize: vertical;
+  color: $text-primary;
+  border: 1px solid $border;
+  border-radius: 12px;
+  outline: none;
+  background: rgba(6, 10, 23, 0.65);
+  font: inherit;
+  font-size: 12px;
+  transition: $transition;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $border-bright;
+    box-shadow: 0 0 0 3px rgba(116, 86, 255, 0.08);
+  }
+}
+
+.reasonCount {
+  margin-top: 6px;
+  color: $text-muted;
+  font-size: 9px;
+  text-align: right;
+}
+
+.dynamicProgress {
+  width: var(--progress-width, 0%);
+}
+
+.decisionResults {
+  margin-top: 22px;
+  display: grid;
+  gap: 14px;
+}
+
+.decisionResultOption {
+  padding: 16px;
+  border: 1px solid $border;
+  border-radius: 14px;
+  background: $surface;
+}
+
+.decisionResultHeader {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  strong {
+    color: $text-primary;
+    font-size: 12px;
+  }
+
+  span {
+    color: $text-secondary;
+    font-size: 10px;
+  }
+}
+
+.decisionResultBar {
+  height: 6px;
+}
+
+.decisionResultFill {
+  box-shadow: 0 0 14px rgba(116, 86, 255, 0.18);
+}
+
+.teamResponses {
+  margin-top: 30px;
+}
+
+.teamResponseList {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.teamResponse {
+  align-items: flex-start;
+}
+
+.responseChoice {
+  color: $purple-light !important;
+  font-weight: 700;
+}
+
+.responseConfidence {
+  color: $text-secondary !important;
+}
+
+.responseReason {
+  max-width: 560px;
+  margin: 8px 0 0;
+  color: $text-secondary;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .decisionOptionInputRow {
+    align-items: stretch;
+  }
+
+  .confidenceButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .decisionResultHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+.copyCodeButton {
+  width: 100%;
+  margin-top: 14px;
+  padding: 9px 12px;
+  color: $purple-light;
+  border: 1px solid rgba(116, 86, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(116, 86, 255, 0.08);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  transition: $transition;
+
+  &:hover {
+    color: $text-primary;
+    border-color: $purple;
+    background: rgba(116, 86, 255, 0.16);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
