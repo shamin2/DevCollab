@@ -9,6 +9,7 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import { registerRoomSocket } from "./sockets/roomSocket.js";
 
+// DevCollab Backend
 const app = express();
 const httpServer = createServer(app);
 
