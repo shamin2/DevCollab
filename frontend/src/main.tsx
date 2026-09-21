@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import "./styles/global.scss";
 
+// Frontend CI/CD test
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
