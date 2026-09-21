@@ -7,32 +7,43 @@ on:
     paths:
       - "backend/**"
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd ~/DevCollab
-            git pull origin main
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-2
 
-            cd backend
+      - name: Deploy backend through SSM
+        run: |
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids "i-04f5b0af7f7ef2788" \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "sudo -u ec2-user git -C /home/ec2-user/DevCollab pull origin main",
+              "cd /home/ec2-user/DevCollab/backend",
+              "docker build -t devcollab-backend .",
+              "docker rm -f devcollab-backend || true",
+              "docker run -d --name devcollab-backend --env-file .env.production -p 5001:5001 --restart unless-stopped devcollab-backend",
+              "docker image prune -f"
+            ]' \
+            --query "Command.CommandId" \
+            --output text)
 
-            sudo docker build -t devcollab-backend .
+          echo "SSM Command ID: $COMMAND_ID"
 
-            sudo docker rm -f devcollab-backend || true
+          aws ssm wait command-executed \
+            --command-id "$COMMAND_ID" \
+            --instance-id "i-04f5b0af7f7ef2788"
 
-            sudo docker run -d \
-              --name devcollab-backend \
-              --env-file .env.production \
-              -p 5001:5001 \
-              --restart unless-stopped \
-              devcollab-backend
-
-            sudo docker image prune -f
+          aws ssm get-command-invocation \
+            --command-id "$COMMAND_ID" \
+            --instance-id "i-04f5b0af7f7ef2788"
