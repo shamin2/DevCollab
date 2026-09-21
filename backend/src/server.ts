@@ -9,13 +9,17 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import { registerRoomSocket } from "./sockets/roomSocket.js";
 
-// DevCollab Backend
 const app = express();
 const httpServer = createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://dqhvj7p6i8eag.cloudfront.net",
+];
+
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PATCH"],
   },
 });
@@ -27,9 +31,15 @@ io.on("connection", (socket) => {
 
   registerRoomSocket(io, socket);
 });
+
 const PORT = 5001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
+
 app.use(express.json());
 app.use("/api/rooms", roomRoutes);
 app.use("/api/rooms", memberRoutes);
